@@ -140,7 +140,28 @@ router.get('/getrelateditems', (req, res) => {
       res.status(500).send(`Error connecting to database: ${err}`);
     });
 });
+router.get('/products', (req, res) => {
+  connectToDatabase().then((db) => {
+    db.collection('product').find().toArray( (err, doc) =>{
+      res.json(doc);
+    })
+  })
+})
+router.post('/item', (req, res) => {
+  //tao product dua tren id cua category, su dung postman de post len
+console.log(req.body);
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').insert(req.body, (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error create to database with error: ${err}`);
+        }
 
+        res.send(doc);
+      })
+    })
+
+})
 router.post('/addreview/:id', (req, res) => {
   const id = parseInt(req.params.id);
 

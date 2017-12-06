@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const api = require('./routes');
 const path = require('path');
 const rootPath = path.normalize(`${__dirname}/..`);
+const productRoutes = require('./routes/routes.js');
 require('dotenv').config();
 
 const app = express();
@@ -14,15 +15,17 @@ const app = express();
 /* configure middleware */
 app.set('appPath', path.join(rootPath, 'client'));
 app.use(express.static('./client'));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+//app.use('/',productRoutes);
 
 /* setup routing */
 app.use('/api', api);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(`${app.get('appPath')}/index.html`));
 });
+
 
 /* export app */
 module.exports = app;

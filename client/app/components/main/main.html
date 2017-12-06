@@ -12,7 +12,7 @@
 
     <div class="row">
 
-        <div class="col-md-2">
+        <div class="col-md-6">
             <div class="list-group" >
                 <a ng-repeat="category in categories" ng-click="changeCategory(category._id)" ng-class="currentCategory == category._id ? 'list-group-item active' : 'list-group-item inactive'">
                     <span class="badge">{{category.num}}</span>
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="col-md-10" >
+        <div class="col-md-6" >
             <div ng-repeat="item in items" ng-model="items">
                 <div class="row" >
                     <div class="col-md-7">
